@@ -51,4 +51,86 @@ Red arrow: Both circuits have their codes in folders ``/Circuit1`` and ``/Circui
 ![image](/img/setup2.png) 
 Some libraries in the code may be missing on your Pico W and the code may not work at the beginning. The libraries I use are usually the ones found on Pico W devices that have been installed, but if it is not found on your device, you can download a missing library from Tools and then Manage Libraries, which is shown with an arrow in the picture.
 
-**4- Setup Code**  
+**4- WiFi**  
+The code should be updated with some personal information of the user and the devices should be runned after that.  
+The SSID and password of user's WiFi must be written in the code.  
+```/Circuit1/main.py```:
+``` Python
+wlan.connect("SSID HERE", "PASSWORD HERE") # line 38
+```
+```/Circuit2/main.py```:
+``` Python
+wlan.connect("SSID HERE", "PASSWORD HERE") # line 76
+```
+
+**5- MQTT**   
+You need to create an MQTT cloud server account. If you have an account on such a platform, you can use that. Or you can choose [io.adafruit.com](io.adafruit.com) as I use it.  
+After creating your account, create the topics in the feeds section with the names written in the codes below.   
+![image](/img/setup3.png)   
+As you can see in the image, create the topics with the names written in the codes below from the feeds section. Most importantly is My Key section, you will not write password of your in the code, you will write your personal key that you will find in the My Key section.  
+```/Circuit1/main.py```:
+``` Python
+mqtt_server = "io.adafruit.com" # line 26
+topic = "YOUR_USERNAME/feeds/sui" # line 28
+user = "YOUR_USERNAME" # line 29
+password = "YOUR_KEY" # line 30
+```
+```/Circuit2/main.py```:
+``` Python
+mqtt_server = "io.adafruit.com"  # line 16
+user = "YOUR_USERNAME" # line 17
+password = "YOUR_KEY" # line 18
+topic_tem = "YOUR_USERNAME/feeds/tem" # line 20
+topic_hum = "YOUR_USERNAME/feeds/hum" # line 21
+topic_fire = "YOUR_USERNAME/feeds/fire" # line 22
+topic_eq = "YOUR_USERNAME/feeds/eq" # line 23
+topic_gas = "YOUR_USERNAME/feeds/gas" # line 24
+```
+
+**5- Mobile (optional)**  
+io.adafruit.com is not only a cloud server, it can also be used as a dashboard. So you can only use your computer to view your IoT data. However, if you want to receive notifications from the phone and access the dashboard much more easily, you can download a MQTT Dashboard.   
+There are many MQTT Dashboard applications, but this is the application I use as my dashboard:   
+[Download Link](https://play.google.com/store/apps/details?id=com.app.vetru.mqttdashboard&hl=en_US)
+
+**6- Run it**  
+After making circuit connections, your devices are now ready to run. If you want, you can run it by connecting to the computer via USB, you can plug it into the socket with a charger or run it with a powerbank.   
+
+
+## Putting everything together   
+
+### Diagram of the Circuit 1:   
+![image](/img/diagram_circuit1.png)   
+
+### Diagram of the Circuit 2:   
+![image](/img/diagram_circuit2.png)  
+
+### Connections
+The connections are simple, but there are considerations. Diagrams also show which GPIOs connected to pins, but feel free to connect to other GPIOs. The diagrams above are made in an integrated circuit design application called "Digital" and show the connections very clearly.   
+However, in case something is not understood from the diagrams, it is useful to go over it in a little detail.   
+
+**Circuit 1:**  
+* ``Buzzer``: Has two pins(+ and -). Connect +(long) pin to GPIO and -(short) pin to GND with at least 220Ω resistor.  
+* ``LED``: Has two pins(+ and -). Connect +(long) pin to GPIO and -(short) pin to GND with at least 220Ω resistor.  
+* ``HC-SR04``: Has four pins(GND, Echo, Trigger, Vcc). Connect Vcc to 3.3 volt output, GND to GND and Trigger to GPIO. Echo pin is important, it should be connected to another GPIO with 1kΩ resistor and also be connected to GND with at least 1kΩ resistor. 
+
+**Circuit 2:**  
+*All Vcc pins connects to 3.3 volt output and all GND pins to GND (without any resistor)!*
+* ``DHT11``: Has three pins(Vcc, Out, GND). Out pin should be connected first to GPIO without resistor and then to 3.3 volt output with at least 4.7kΩ resistor.   
+* ``Flame``: Has three pins(DO, GND, Vcc). DO pin should be connected first to GPIO without resistor and then to 3.3 volt output with 10kΩ resistor.  
+* ``SW420``: Has three pins(DO, GND, Vcc). DO pin should be connected to GPIO, no resistor needed.  
+* ``MQ2``: Has four pins(Vcc, GND, DO, AO). DO pin should be connected to GPIO, no resistor needed. No need to connect AO pin. 
+* ``LEDS``: Has four pins(G, Y, R, GND). G, Y and R should be connected to diffrent GPIOs. G for green, Y for yellow, R for red. No resistor needed. 
+
+It is important to be careful about connecting right resistors. Resistors protect electronic components from overcurrent, and using the wrong resistor may cause the components to burn or explode. If something like this happens, other components in the circuit may also be damaged, so it is important to be careful. Even if there is no physical damage, the use of wrong resistors may also cause the components working incorrectly, or sensors from detecting correctly.  
+
+## Platform  
+I preferred to use an MQTT cloud server for this IoT project. An MQTT cloud server platform enables communication between IoT devices using the MQTT protocol. It allows devices to send data to each other, in other words, a message broker. MQTT offers secure messaging between IoT devices, topic-based filtering, security measures, and integrations with other services.  
+As I mentioned before, **io.adafruit.com** has been my choice for a cloud server platform. I preferred the Android application called **MQTT Dashboard** for a dashboard. However, io.adafruit.com also had a dashboard, the reason I used another application from the phone was to receive notifications. Both are completely free platforms.  
+
+I didn't find this platform right away and I've looked at other platforms before. There are 2 reasons why I prefer the io.adafruit.com platform.
+Most of the other MQTT cloud server platforms I've looked at first are really complex. They ask a lot of unnecessary details for the connection. This is most likely because they have an old back-end. It's not easy to update and so they're probably wondering things that even my internet company doesn't know, in order to establish a simple connection over WiFi.  
+Not only that, really most of them need to change their UI designer, or maybe they do it on purpose, I don't know, but it's really complicated to use. It takes an hour to find where to create even a simple topic and this is very annoying. It's more like an airplane cockpit than a basic cloud server, hundreds of buttons in random places on the page.  
+The second reason is that most platforms are paid, they require a monthly subscription. A certain fee can be paid for a really high-quality cloud server. But that can't be $45, $35 a month, no matter how high quality they are. Either the developers of this platform do not know how much money 45 dollars per month is or they do it on purpose so that too many people don't use their servers. Anyway, it's the free market, but they should consider how reasonable it is to ask for $45 per month when there are free alternatives like io.adafruit.com.  
+
+
+## Transmitting the data / connectivity
