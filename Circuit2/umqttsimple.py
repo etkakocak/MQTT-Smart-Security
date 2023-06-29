@@ -1,3 +1,5 @@
+# THIS IS A MANUAL DOWNLOADED LIBRARY AND NOT MY OWN WRITTEN CODE!
+
 import usocket as socket
 import ustruct as struct
 from ubinascii import hexlify
