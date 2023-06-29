@@ -134,3 +134,4 @@ The second reason is that most platforms are paid, they require a monthly subscr
 
 
 ## Transmitting the data / connectivity
+  abc

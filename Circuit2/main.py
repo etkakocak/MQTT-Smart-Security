@@ -105,4 +105,4 @@ while True:
     SW420()
     MQ2()
     
-    time.sleep(10)
+    time.sleep(3)
