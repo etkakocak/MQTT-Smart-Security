@@ -134,4 +134,45 @@ The second reason is that most platforms are paid, they require a monthly subscr
 
 
 ## Transmitting the data / connectivity
-  abc
+* Used wireless protocol: **WiFi**  
+* Used transport protocol: **MQTT**  
+
+There is no sending data at certain time intervals for Circuit 1. Data is sent only when someone enters the door. This data is **1**. The alarm is triggered in the MQTT Dashboard and the user gets a notification when the ```sui``` topic gets **1**. User can turn off the alarm from MQTT Dashboard which will send data **0** to ```sui``` topic. The IoT working logic of this circuit is to turn the alarm on and off by processing data 0 and 1.  
+
+The situation for the 3 detectors in Circuit 2 is exactly the same as above. 0 and 1 data are processed and a notification is sent to the user. However, there are 2 data sent at certain time intervals in circuit 2. These are temperature (in celsius) and humidity (as percent) data from DHT11. This data is sent to the ```tem``` and ```hum``` topics every 2 seconds, but the user does not receive notifications for this data. The user can up-to-date see the temperature and humidity of the room by simply entering the MQTT Dashboard application.
+
+### Effects of design choices
+According to my research on the internet, WiFi consumes more battery compared to LoRa. This is because WiFi sends data much faster, which leads to more battery consumption. LoRa also has a much longer range compared to WiFi. The average WiFi has a range of approximately 100 meters, while LoRa can reach a range of thousands of meters. This is because WiFi uses much stronger signals (frequencies) compared to LoRa. But data transfer with WiFi is much safer compared to LoRa. This is because WiFi networks use very strong encryption algorithms such as WPA2 and WPA3 to protect network traffic quite extensively.  
+**While LoRa is more successful in battery consumption and long range, WiFi is more successful in security and speed.**
+
+Again, according to my research on the internet, MQTT consumes less battery compared to webhook. This is because MQTT has low bandwidth, uses simple subscribe-broadcast model compared to HTTP request model of webhook, and can even work when devices are in sleep mode. The range and speed of both vary depending on the used wireless protocol, and they are not comparable in those two terms. Likewise, it is difficult to compare them about security. Both use very different security protocols.  
+**My preference for WiFi as a wireless protocol provides faster and safer data transfer, and MQTT as a transport protocol gives me an advantage in battery consumption.**   
+
+
+## Presenting the data
+
+### Dashboard
+![image](/img/dashboard.jpg)
+Above is a screenshot from the **MQTT Dashboard** mobile app. Both circuits use a common dashboard. The alarm belongs to circuit 1. Fire, earthquake, and gas leak detectors belong to circuit 2. These have green color when there is no problem, ie when their value is 0. And they are red in case of alarm, ie when their value is 1. DHT11 is the section that receives data all the time and you can view the temperature and humidity of the room.  
+
+### Database
+*The database is not available from the MQTT Dashboard app and can be viewed by logging into your io.adafruit.com account.*
+
+![image](/img/database_fire.png)
+Above is the database of the **fire detector**. Here you can view exactly when the sensor detected a fire and when the situation taken under control. Data is only saved in the event of a fire and when the situation is under control in this database.   
+
+![image](/img/database_tem.png)
+Above is the database of temperature in celsius. Here you can view the history of temperatures exactly what day and at what time as a line chart. Data is saved every 2 seconds in this database.  
+
+
+## Final result
+
+### Circuit 2:
+![image](/img/circuit2_1.jpg)
+![image](/img/circuit2_2.jpg)
+
+### Circuit 1:
+![image](/img/circuit1_1.jpg)
+![image](/img/circuit1_2.jpg)
+
+- Give your final thoughts on how you think the project went. What could have been done in an other way, or even better?
