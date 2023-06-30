@@ -175,4 +175,7 @@ Above is the database of temperature in celsius. Here you can view the history o
 ![image](/img/circuit1_1.jpg)
 ![image](/img/circuit1_2.jpg)
 
-- Give your final thoughts on how you think the project went. What could have been done in an other way, or even better?
+### Final thoughts
+I think this project went very well. I learned a lot of new things in this course, both while studying for the quizzes and doing the project. I became very interested in IoT thanks to this course and I want to do similar and even better projects in my spare time.  
+I think this project is comprehensive but if I had more time I would add a few things to make it even better. I would add the RGB LEDs and potentiometer from the package I bought for the project. Thus, there would be a LED lamp in the project whose color was determined by the user. This could take this project to the next level.  
+However, I am happy with my work and I will also do new projects in my spare time with the other pieces that come out of the package because now I love working with IoT.  
