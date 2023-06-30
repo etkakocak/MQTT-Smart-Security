@@ -67,7 +67,7 @@ wlan.connect("SSID HERE", "PASSWORD HERE") # line 76
 You need to create an MQTT cloud server account. If you have an account on such a platform, you can use that. Or you can choose [io.adafruit.com](io.adafruit.com) as I use it.  
 After creating your account, create the topics in the feeds section with the names written in the codes below.   
 ![image](/img/setup3.png)   
-As you can see in the image, create the topics with the names written in the codes below from the feeds section. Most importantly is My Key section, you will not write password of your in the code, you will write your personal key that you will find in the My Key section.  
+As you can see in the image, create the topics with the names written in the codes below from the feeds section. Most importantly is My Key section, you will not write password of your cloud account in the code, you will write your personal key that you will find in the My Key section.  
 ```/Circuit1/main.py```:
 ``` Python
 mqtt_server = "io.adafruit.com" # line 26
@@ -105,7 +105,7 @@ After making circuit connections, your devices are now ready to run. If you want
 ![image](/img/diagram_circuit2.png)  
 
 ### Connections
-The connections are simple, but there are considerations. Diagrams also show which GPIOs connected to pins, but feel free to connect to other GPIOs. The diagrams above are made in an integrated circuit design application called "Digital" and show the connections very clearly.   
+The connections are simple, but there are considerations. Diagrams also show which GPIOs connected to pins, but feel free to connect to other GPIOs. But if you make such a change, remember that you have to change the pin numbers in the code as well. The diagrams above are made in an integrated circuit design application called "Digital" and show the connections very clearly.   
 However, in case something is not understood from the diagrams, it is useful to go over it in a little detail.   
 
 **Circuit 1:**  
@@ -121,7 +121,7 @@ However, in case something is not understood from the diagrams, it is useful to 
 * ``MQ2``: Has four pins(Vcc, GND, DO, AO). DO pin should be connected to GPIO, no resistor needed. No need to connect AO pin. 
 * ``LEDS``: Has four pins(G, Y, R, GND). G, Y and R should be connected to diffrent GPIOs. G for green, Y for yellow, R for red. No resistor needed. 
 
-It is important to be careful about connecting right resistors. Resistors protect electronic components from overcurrent, and using the wrong resistor may cause the components to burn or explode. If something like this happens, other components in the circuit may also be damaged, so it is important to be careful. Even if there is no physical damage, the use of wrong resistors may also cause the components working incorrectly, or sensors from detecting correctly.  
+It is important to be careful about connecting right resistors. Resistors protect electronic components from overcurrent, and using the wrong resistor may cause the components to burn or explode. If something like this happens, other components in the circuit may also be damaged, so it is important to be careful. Even if there is no physical damage, the use of wrong resistors may also cause the components working incorrectly or sensors detecting incorrectly.  
 
 ## Platform  
 I preferred to use an MQTT cloud server for this IoT project. An MQTT cloud server platform enables communication between IoT devices using the MQTT protocol. It allows devices to send data to each other, in other words, a message broker. MQTT offers secure messaging between IoT devices, topic-based filtering, security measures, and integrations with other services.  
