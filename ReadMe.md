@@ -1,5 +1,5 @@
 # MQTT Smart Security
-*This is a group project made by Etka Kocak and Furkan Yildirim. The report is personal and the author of this report is Etka Kocak.*  
+*This is a group project made by Etka Kocak and Faruk Yildirim. The report is personal and the author of this report is Etka Kocak.*  
 
 **Author: Etka Kocak (ek223zf)**  
 **Course: 1DT305 - Introduction to IoT**  
