@@ -9,11 +9,11 @@ Approximate time required to replicate the project: **2-3 hours**
 
 
 ## Objective  
-The main reason why I did this project is that I think that the technological progress in the security sector should be accelerated even more. For example, alarmed doors are now a must-have in almost every home not just big locales like schools or company buildings, we live in a time when people can no longer fully trust even the keys. When you are not at home, a fire that may occur due to production negligence in an electronic device, a gas leak that may occur while you are sleeping, or an unexpected earthquake. Additionally, a high level of humidity may occur in the locales, which threatens human health. These are all things we usually see on the news or think about if it happens to us. The solution is technology. The Internet and some sensors can be our personal guards if we use them correctly.  
+The main reason why I did this project is that I think that the technological progress in the security sector should be accelerated even more. For example, alarmed doors are now a must-have in almost every home not just big locales like schools or company buildings, we live in a time when people can no longer fully trust even the keys. When you are not at home, a fire that may occur due to production negligence in an electronic device, a gas leak that may occur while you are sleeping, or an unexpected earthquake. Additionally, a high level of humidity may occur in the locales, which threatens human health. These are all things we usually see on the news or think about if it happens to us. The solution is technology. The internet and some sensors can be our personal guards if we use them correctly.  
 
 Circuit 1 of MQTT Smart Security with an ultrasonic distance sensor can detect when someone enters from a door while it is placed on the edge of the door. After that, it uses MQTT to send a notification to your phone and starts the alarm with a buzzer and red LED. You can turn off the alarm easily from your phone if you are the person who opens this door and enters.  
 
-Circuit 2 is more extensive. It includes 4 different sensors and 3 LEDs (red, yellow and green).  
+Circuit 2 is more extensive. It includes 4 different sensors and 3 LEDs (red, yellow, and green).  
 The temperature and humidity sensor instantly transmits the temperature (in celsius) and humidity of the room to your phone via MQTT. You can even see those data in detail as a line chart on a web page. The green led in the circuit is always on and this indicates that everything is ok, but when the yellow led is on, it means you should control the temperature and humidity of your room. If the room is too cold, or too hot, or if there is abnormal humidity, the yellow LED will be on for you to take action about it.  
 The flame sensor detects a fire very quickly and send warns you with a notification to your phone. Likewise, the vibration sensor quickly detects vibrations and sends a warning notification to your phone in case of an earthquake. If this earthquake happens while you are awake, it will not help too much, but if it happens while you are asleep, it can save your life. The gas sensor detects any gas that threats human health and warns you with a notification the same way. Some gas leaks are not immediately obvious to people and can be fatal, so this is necessary for homes that use natural gas or fireplaces.  
 Not temperature and humidity but those other sensors that can detect important threats turn on the red LED, which means a red alarm. The red LED, therefore, means that you must leave the house directly.
@@ -44,7 +44,7 @@ Thonny IDE is simple to use, you can follow the steps below if you choose it:
 
 **2- Setup Raspberry Pi Pico W**  
 ![image](/img/setup1.png)  
-Green arrow: Make sure you have selected Raspberry Pi Pico W as interpreter.  
+Green arrow: Make sure you have selected Raspberry Pi Pico W as the interpreter.  
 Red arrow: Both circuits have their codes in folders ``/Circuit1`` and ``/Circuit2``. Please note that codes in each of the folders can only be saved to one Pico W device. So you will need 2 Pico W. Copy and paste those codes and don't forget to choose Pico W as the save location when saving with CTRL+S.  
 
 **3- Libraries**  
@@ -52,8 +52,8 @@ Red arrow: Both circuits have their codes in folders ``/Circuit1`` and ``/Circui
 Some libraries in the code may be missing on your Pico W and the code may not work at the beginning. The libraries I use are usually the ones found on Pico W devices that have been installed, but if it is not found on your device, you can download a missing library from Tools and then Manage Libraries, which is shown with an arrow in the picture.
 
 **4- WiFi**  
-The code should be updated with some personal information of the user and the devices should be runned after that.  
-The SSID and password of user's WiFi must be written in the code.  
+The code should be updated with some personal information of the user and the devices should be run after that.  
+The SSID and password of the user's WiFi must be written in the code.  
 ```/Circuit1/main.py```:
 ``` Python
 wlan.connect("SSID HERE", "PASSWORD HERE") # line 38
@@ -67,7 +67,7 @@ wlan.connect("SSID HERE", "PASSWORD HERE") # line 76
 You need to create an MQTT cloud server account. If you have an account on such a platform, you can use that. Or you can choose [io.adafruit.com](io.adafruit.com) as I use it.  
 After creating your account, create the topics in the feeds section with the names written in the codes below.   
 ![image](/img/setup3.png)   
-As you can see in the image, create the topics with the names written in the codes below from the feeds section. Most importantly is My Key section, you will not write password of your cloud account in the code, you will write your personal key that you will find in the My Key section.  
+As you can see in the image, create the topics with the names written in the codes below from the feeds section. Most important is My Key section, you will not write the password of your cloud account in the code, you will write your personal key that you will find in the My Key section.  
 ```/Circuit1/main.py```:
 ``` Python
 mqtt_server = "io.adafruit.com" # line 26
@@ -87,13 +87,13 @@ topic_eq = "YOUR_USERNAME/feeds/eq" # line 23
 topic_gas = "YOUR_USERNAME/feeds/gas" # line 24
 ```
 
-**5- Mobile (optional)**  
-io.adafruit.com is not only a cloud server, it can also be used as a dashboard. So you can only use your computer to view your IoT data. However, if you want to receive notifications from the phone and access the dashboard much more easily, you can download a MQTT Dashboard.   
+**6- Mobile (optional)**  
+io.adafruit.com is not only a cloud server, it can also be used as a dashboard. So you can only use your computer to view your IoT data. However, if you want to receive notifications from the phone and access the dashboard much more easily, you can download an MQTT Dashboard.   
 There are many MQTT Dashboard applications, but this is the application I use as my dashboard:   
 [Download Link](https://play.google.com/store/apps/details?id=com.app.vetru.mqttdashboard&hl=en_US)
 
-**6- Run it**  
-After making circuit connections, your devices are now ready to run. If you want, you can run it by connecting to the computer via USB, you can plug it into the socket with a charger or run it with a powerbank.   
+**7- Run it**  
+After making circuit connections, your devices are now ready to run. If you want, you can run it by connecting to the computer via USB, you can plug it into the socket with a charger, or run it with a powerbank.   
 
 
 ## Putting everything together   
@@ -105,23 +105,23 @@ After making circuit connections, your devices are now ready to run. If you want
 ![image](/img/diagram_circuit2.png)  
 
 ### Connections
-The connections are simple, but there are considerations. Diagrams also show which GPIOs connected to pins, but feel free to connect to other GPIOs. But if you make such a change, remember that you have to change the pin numbers in the code as well. The diagrams above are made in an integrated circuit design application called "Digital" and show the connections very clearly.   
+The connections are simple, but there are considerations. Diagrams also show which GPIOs are connected to pins, but feel free to connect to other GPIOs. But if you make such a change, remember that you have to change the pin numbers in the code as well. The diagrams above are made in an integrated circuit design application called "Digital" and show the connections very clearly.   
 However, in case something is not understood from the diagrams, it is useful to go over it in a little detail.   
 
 **Circuit 1:**  
 * ``Buzzer``: Has two pins(+ and -). Connect +(long) pin to GPIO and -(short) pin to GND with at least 220Ω resistor.  
 * ``LED``: Has two pins(+ and -). Connect +(long) pin to GPIO and -(short) pin to GND with at least 220Ω resistor.  
-* ``HC-SR04``: Has four pins(GND, Echo, Trigger, Vcc). Connect Vcc to 3.3 volt output, GND to GND and Trigger to GPIO. Echo pin is important, it should be connected to another GPIO with 1kΩ resistor and also be connected to GND with at least 1kΩ resistor. 
+* ``HC-SR04``: Has four pins(GND, Echo, Trigger, Vcc). Connect Vcc to 3.3 volt output, GND to GND, and Trigger to GPIO. Echo pin is important, it should be connected to another GPIO with 1kΩ resistor and also be connected to GND with at least 1kΩ resistor. 
 
 **Circuit 2:**  
-*All Vcc pins connects to 3.3 volt output and all GND pins to GND (without any resistor)!*
+*All Vcc pins connect to 3.3 volt output and all GND pins to GND (without any resistor)!*
 * ``DHT11``: Has three pins(Vcc, Out, GND). Out pin should be connected first to GPIO without resistor and then to 3.3 volt output with at least 4.7kΩ resistor.   
 * ``Flame``: Has three pins(DO, GND, Vcc). DO pin should be connected first to GPIO without resistor and then to 3.3 volt output with 10kΩ resistor.  
-* ``SW420``: Has three pins(DO, GND, Vcc). DO pin should be connected to GPIO, no resistor needed.  
-* ``MQ2``: Has four pins(Vcc, GND, DO, AO). DO pin should be connected to GPIO, no resistor needed. No need to connect AO pin. 
-* ``LEDS``: Has four pins(G, Y, R, GND). G, Y and R should be connected to diffrent GPIOs. G for green, Y for yellow, R for red. No resistor needed. 
+* ``SW420``: Has three pins(DO, GND, Vcc). DO pin should be connected to GPIO, no resistor is needed.  
+* ``MQ2``: Has four pins(Vcc, GND, DO, AO). DO pin should be connected to GPIO, no resistor is needed. No need to connect AO pin. 
+* ``LEDS``: Has four pins(G, Y, R, GND). G, Y, and R should be connected to different GPIOs. G for green, Y for yellow, and R for red. No resistor is needed. 
 
-It is important to be careful about connecting right resistors. Resistors protect electronic components from overcurrent, and using the wrong resistor may cause the components to burn or explode. If something like this happens, other components in the circuit may also be damaged, so it is important to be careful. Even if there is no physical damage, the use of wrong resistors may also cause the components working incorrectly or sensors detecting incorrectly.  
+It is important to be careful about connecting right resistors. Resistors protect electronic components from overcurrent, and using the wrong resistor may cause the components to burn or explode. If something like this happens, other components in the circuit may also be damaged, so it is important to be careful. Even if there is no physical damage, the use of wrong resistors may also cause the components to work incorrectly or sensors to detect incorrectly.  
 
 ## Platform  
 I preferred to use an MQTT cloud server for this IoT project. An MQTT cloud server platform enables communication between IoT devices using the MQTT protocol. It allows devices to send data to each other, in other words, a message broker. MQTT offers secure messaging between IoT devices, topic-based filtering, security measures, and integrations with other services.  
@@ -139,7 +139,7 @@ The second reason is that most platforms are paid, they require a monthly subscr
 
 There is no sending data at certain time intervals for Circuit 1. Data is sent only when someone enters the door. This data is **1**. The alarm is triggered in the MQTT Dashboard and the user gets a notification when the ```sui``` topic gets **1**. User can turn off the alarm from MQTT Dashboard which will send data **0** to ```sui``` topic. The IoT working logic of this circuit is to turn the alarm on and off by processing data 0 and 1.  
 
-The situation for the 3 detectors in Circuit 2 is exactly the same as above. 0 and 1 data are processed and a notification is sent to the user. However, there are 2 data sent at certain time intervals in circuit 2. These are temperature (in celsius) and humidity (as percent) data from DHT11. This data is sent to the ```tem``` and ```hum``` topics every 2 seconds, but the user does not receive notifications for this data. The user can up-to-date see the temperature and humidity of the room by simply entering the MQTT Dashboard application.
+The situation for the 3 detectors in Circuit 2 is exactly the same as above. 0 and 1 data are processed and a notification is sent to the user. However, there are 2 data sent at certain time intervals in circuit 2. These are temperature (in celsius) and humidity (as percent) data from DHT11. This data is sent to the ```tem``` and ```hum``` topics every 3 seconds, but the user does not receive notifications for this data. The user can up-to-date see the temperature and humidity of the room by simply entering the MQTT Dashboard application.
 
 ### Effects of design choices
 According to my research on the internet, WiFi consumes more battery compared to LoRa. This is because WiFi sends data much faster, which leads to more battery consumption. LoRa also has a much longer range compared to WiFi. The average WiFi has a range of approximately 100 meters, while LoRa can reach a range of thousands of meters. This is because WiFi uses much stronger signals (frequencies) compared to LoRa. But data transfer with WiFi is much safer compared to LoRa. This is because WiFi networks use very strong encryption algorithms such as WPA2 and WPA3 to protect network traffic quite extensively.  
@@ -159,10 +159,10 @@ Above is a screenshot from the **MQTT Dashboard** mobile app. Both circuits use 
 *The database is not available from the MQTT Dashboard app and can be viewed by logging into your io.adafruit.com account.*
 
 ![image](/img/database_fire.png)
-Above is the database of the **fire detector**. Here you can view exactly when the sensor detected a fire and when the situation taken under control. Data is only saved in the event of a fire and when the situation is under control in this database.   
+Above is the database of the **fire detector**. Here you can view exactly when the sensor detected a fire and when the situation is taken under control. Data is only saved in the event of a fire and when the situation is under control in this database.   
 
 ![image](/img/database_tem.png)
-Above is the database of temperature in celsius. Here you can view the history of temperatures exactly what day and at what time as a line chart. Data is saved every 2 seconds in this database.  
+Above is the database of temperature in celsius. Here you can view the history of temperatures exactly what day and at what time as a line chart. Data is saved every 3 seconds in this database.  
 
 
 ## Final result
